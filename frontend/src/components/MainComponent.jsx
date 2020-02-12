@@ -1,7 +1,8 @@
 import React from "react"
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import LoginComponent from "./LoginComponent"
 import MyProfile from "./MyProfile"
+import Navbar from "./Navbar"
 import PrivateRoute from "./PrivateRoute"
 import RegisterComponent from "./RegisterComponent"
 import { connect } from "react-redux"
@@ -23,11 +24,7 @@ class MainComponent extends React.Component {
         return (
             <Router>
                 <h1> Welcome to our app! Ready to login or register!</h1>
-                <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-                    <Link to="/register">Register</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/profile">Profile</Link>
-                </div>
+                <Navbar />
                 <Switch>
                     <Route path="/register">
                         <RegisterComponent />{/* setUserAuth={(userAuth) => this.setState({ userAuth: userAuth})} */}
