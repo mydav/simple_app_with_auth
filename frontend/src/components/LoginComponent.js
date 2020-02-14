@@ -50,6 +50,8 @@ function LoginComponent(props) {
     }
   }
 
+  if (props.userToken)
+    props.history.push("/profile")
   return (
     <div className="App">
       <header className="App-header">

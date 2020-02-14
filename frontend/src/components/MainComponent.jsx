@@ -26,13 +26,17 @@ class MainComponent extends React.Component {
                 <h1> Welcome to our app! Ready to login or register!</h1>
                 <Navbar />
                 <Switch>
+                    
                     <Route path="/register">
                         <RegisterComponent />{/* setUserAuth={(userAuth) => this.setState({ userAuth: userAuth})} */}
                     </Route>
                     <Route path="/login">
-                        <LoginComponent />{/* setUserAuth={(userAuth) => this.setState({ userAuth: userAuth})} */}
+                        <LoginComponent path="/profile" />{/* setUserAuth={(userAuth) => this.setState({ userAuth: userAuth})} */}
                     </Route>
+                    
                     <PrivateRoute isAuthenticated={this.props.userToken} path="/profile" component={MyProfile} />
+
+                    <PrivateRoute whereToRedirect="/userFailure" isAuthenticated={this.props.username === "Vadym"} path="/whatever" component={MyProfile} />
                 </Switch>
             </Router>)
     }
@@ -51,6 +55,7 @@ class MainComponent extends React.Component {
                 const userJson = await response.json();
                 this.props.setUserToken(userJson.access_token)
                 localStorage.setItem("access_token", userJson.access_token)
+                
                 console.log("token was ok, refreshed")
             }
             else{ //else, token is not valid, let me remove it!
